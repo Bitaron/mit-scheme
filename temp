@@ -1,0 +1,17 @@
+runLisp:
+     mit-scheme --load testLibrary.scm add.scm addTest.scm
+
+
+(define (primitive? data)
+		(or (integer? data) (symbol? data) (string? data) (char? data)))
+	(define (pairOrList? data)
+		(or (pair? data) (list? data)))
+	(define (eqPairOrList? a e)
+		(cond	((eq? a 'failed) (display '-failed))
+				((and (null? a) (null? e)) (display '-passed))
+				((or (null? a) (null? e)) (display '-failed))
+				((and (pirmitive? (car a)) (primitive? (car e)))
+					(if (not (eq? (car a) (car e))) 'failed))
+				((or (pirmitive? (car a)) (primitive? (car e))) (display '-failed)) 
+				
+				
